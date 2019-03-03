@@ -15,7 +15,11 @@ public class TurtleSoup {
      * @param sideLength length of each side
      */
     public static void drawSquare(Turtle turtle, int sideLength) {
-        throw new RuntimeException("implement me!");
+    	 for(int x = 0; x < 4; x++)
+    	 {
+             turtle.forward(sideLength);
+             turtle.turn(90.0);
+         }
     }
 
     /**
@@ -28,7 +32,7 @@ public class TurtleSoup {
      * @return angle in degrees, where 0 <= angle < 360
      */
     public static double calculateRegularPolygonAngle(int sides) {
-        throw new RuntimeException("implement me!");
+    	return (sides-2)*180.0/sides;
     }
 
     /**
@@ -42,7 +46,7 @@ public class TurtleSoup {
      * @return the integer number of sides
      */
     public static int calculatePolygonSidesFromAngle(double angle) {
-        throw new RuntimeException("implement me!");
+    	return (int)(Math.round(360/(180-angle)));
     }
 
     /**
@@ -55,7 +59,11 @@ public class TurtleSoup {
      * @param sideLength length of each side
      */
     public static void drawRegularPolygon(Turtle turtle, int sides, int sideLength) {
-        throw new RuntimeException("implement me!");
+    	for(int x = sides; x > 0; x--)
+    	{
+            turtle.forward(sideLength);
+            turtle.turn(180.0 - calculateRegularPolygonAngle(sides));
+        }
     }
 
     /**
@@ -109,7 +117,18 @@ public class TurtleSoup {
      * @param turtle the turtle context
      */
     public static void drawPersonalArt(Turtle turtle) {
-        throw new RuntimeException("implement me!");
+    	int sides = 9;
+        int sideLength = 90;
+        for(int x = sides; x > 0; x--)
+        {
+            for(int y = 30; y>0; y-=10)
+            {
+                drawRegularPolygon(turtle, 4, y);
+            }
+            drawRegularPolygon(turtle, 6, 50);
+            turtle.forward(sideLength);
+            turtle.turn(180.0 - calculateRegularPolygonAngle(sides));
+        }
     }
 
     /**
@@ -125,6 +144,10 @@ public class TurtleSoup {
         drawSquare(turtle, 40);
 
         // draw the window
+        turtle.draw();
+        drawRegularPolygon(turtle,5, 60);
+        drawPersonalArt(turtle);
+       
         turtle.draw();
     }
 
